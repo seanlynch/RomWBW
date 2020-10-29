@@ -1,4 +1,5 @@
-;
+; Etched Pixels's ZXKey driver from Fuzix adapted to HBIOS
+
 ;	Low level driver for the ZXKey Interface. We scan at 60Hz or so
 ;	thus we do this in asm to avoid extra interrupt overhead
 ;
@@ -41,6 +42,15 @@ ZXKEY_KEYPRESS_SHIFT	.equ	2
 ZXKEY_KEYBIT_SHIFT	.equ	1
 ZXKEY_KEYPRESS_CTRL	.equ	4
 ZXKEY_KEYBIT_CTRL	.equ	2
+
+	;; HBIOS functions
+ZXKEY_STAT:
+	;; TODO
+ZXKEY_FLUSH:
+	;; TODO
+ZXKEY_READ:
+	;; TODO
+
 ;
 ;	On exit we return to C with HL indicating the key code and shift
 ;	type so that C can decide what to do. 0 is used to indicate
@@ -348,7 +358,7 @@ zxkey_notsymsh:
 
 		.area ZXKEY_DISCARD
 
-_zxkey_init:
+ZXKEY_INIT:
 		; Set up both arrays
 		ld hl,#zxkey_keybuf
 		ld a,#0xFF
